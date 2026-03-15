@@ -29,16 +29,16 @@ export default function ActivityFeed({ items }: ActivityFeedProps) {
               ) : null}
               <div className="relative flex space-x-3">
                 <div>
-                  <span className={`h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white ${item.iconBg}`}>
+                  <span className={`h-8 w-8 rounded-xl flex items-center justify-center ring-4 ring-background ${item.iconBg}`}>
                     {item.icon}
                   </span>
                 </div>
                 <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                   <div>
-                    <p className="text-sm text-gray-900">{item.title}</p>
-                    <p className="text-sm text-gray-500 mt-0.5">{item.description}</p>
+                    <p className="text-sm font-bold tracking-tight">{item.title}</p>
+                    <p className="text-xs text-muted-foreground mt-1 font-medium">{item.description}</p>
                   </div>
-                  <div className="text-right text-xs whitespace-nowrap text-gray-500">
+                  <div className="text-right text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 italic lowercase">
                     <time dateTime={item.time}>{item.time}</time>
                   </div>
                 </div>
