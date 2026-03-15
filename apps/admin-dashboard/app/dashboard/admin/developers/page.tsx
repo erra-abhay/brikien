@@ -34,13 +34,13 @@ export default function AdminDevelopersPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold">Manage Developers</h1>
-          <p className="text-gray-500">Add, edit, or deactivate accounts.</p>
+          <p className="text-muted-foreground">Add, edit, or deactivate accounts.</p>
         </div>
         <Link 
           href="/dashboard/admin/developers/new" 
-          className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition"
+          className="bg-primary text-primary-foreground px-6 py-2 rounded-xl text-sm font-black hover:opacity-90 shadow-lg shadow-primary/20 transition-all active:scale-95"
         >
-          Add Developer
+          ADD_PERSONNEL
         </Link>
       </div>
 

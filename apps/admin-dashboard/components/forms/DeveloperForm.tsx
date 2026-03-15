@@ -60,48 +60,48 @@ export default function DeveloperForm({ initialData, onSubmit, onCancel }: Devel
           />
         </div>
         
-        <div className="w-full sm:w-2/3 space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="w-full sm:w-2/3 space-y-6">
+          <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-1">Name</label>
-              <input {...register('name')} className="w-full border rounded-md px-3 py-2" />
-              {errors.name?.message && <p className="text-red-500 text-xs mt-1">{String(errors.name.message)}</p>}
+              <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Internal Name</label>
+              <input {...register('name')} className="w-full bg-card/30 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" />
+              {errors.name?.message && <p className="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wide">{String(errors.name.message)}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
-              <input {...register('email')} className="w-full border rounded-md px-3 py-2" disabled={isEditing} />
-              {errors.email?.message && <p className="text-red-500 text-xs mt-1">{String(errors.email.message)}</p>}
+              <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Comms Channel (Email)</label>
+              <input {...register('email')} className="w-full bg-card/30 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" disabled={isEditing} />
+              {errors.email?.message && <p className="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wide">{String(errors.email.message)}</p>}
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-1">{isEditing ? 'New Password (optional)' : 'Password'}</label>
-              <input {...register('password')} type="password" className="w-full border rounded-md px-3 py-2" />
-              {errors.password?.message && <p className="text-red-500 text-xs mt-1">{String(errors.password.message)}</p>}
+              <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground/60 mb-2">{isEditing ? 'Rotate Access (optional)' : 'Access Token'}</label>
+              <input {...register('password')} type="password" className="w-full bg-card/30 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" />
+              {errors.password?.message && <p className="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wide">{String(errors.password.message)}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Role</label>
-              <select {...register('role')} className="w-full border rounded-md px-3 py-2 bg-white">
-                <option value="developer">Developer</option>
-                <option value="admin">Admin</option>
+              <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Clearance Level</label>
+              <select {...register('role')} className="w-full bg-card/30 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none appearance-none cursor-pointer">
+                <option value="developer">DEVELOPER</option>
+                <option value="admin">ADMIN</option>
               </select>
-              {errors.role?.message && <p className="text-red-500 text-xs mt-1">{String(errors.role.message)}</p>}
+              {errors.role?.message && <p className="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wide">{String(errors.role.message)}</p>}
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Bio</label>
-            <textarea {...register('bio')} className="w-full border rounded-md px-3 py-2 h-20 resize-none" />
+            <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Biography</label>
+            <textarea {...register('bio')} className="w-full bg-card/30 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none h-24 resize-none" />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1">Skills</label>
+            <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Technical Proficiencies</label>
             <Controller
               control={control}
               name="skills"
               render={({ field }) => (
-                <TagInput tags={field.value || []} onChange={field.onChange} placeholder="React, Node..." />
+                <TagInput tags={field.value || []} onChange={field.onChange} placeholder="Metadata input..." />
               )}
             />
           </div>
@@ -115,10 +115,10 @@ export default function DeveloperForm({ initialData, onSubmit, onCancel }: Devel
         <div><label className="block text-sm font-medium mb-1">Portfolio URL</label><input {...register('socialLinks.portfolio')} className="w-full border rounded-md px-3 py-2" /></div>
       </div>
 
-      <div className="pt-4 flex justify-end gap-2">
-        <button type="button" onClick={onCancel} className="px-6 py-2 border rounded-md hover:bg-gray-50 transition" disabled={loading}>Cancel</button>
-        <button type="submit" className="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition" disabled={loading}>
-          {loading ? 'Saving...' : 'Save Developer'}
+      <div className="pt-8 flex justify-end gap-3 border-t border-border">
+        <button type="button" onClick={onCancel} className="px-8 py-3 border border-border rounded-xl text-sm font-bold hover:bg-muted/50 transition-all active:scale-95 disabled:opacity-50" disabled={loading}>CANCEL</button>
+        <button type="submit" className="px-8 py-3 bg-primary text-primary-foreground rounded-xl text-sm font-black hover:opacity-90 shadow-lg shadow-primary/20 transition-all active:scale-95 disabled:opacity-50" disabled={loading}>
+          {loading ? 'UPLOADING...' : 'SAVE PERSONNEL'}
         </button>
       </div>
     </form>

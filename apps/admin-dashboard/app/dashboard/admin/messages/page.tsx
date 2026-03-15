@@ -62,14 +62,14 @@ export default function AdminMessagesPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold">Contact Messages</h1>
-          <p className="text-gray-500">Manage messages from the public website.</p>
+          <p className="text-muted-foreground">Manage messages from the public website.</p>
         </div>
         <button 
           onClick={handleExport}
           disabled={exporting}
-          className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition disabled:opacity-50"
+          className="bg-primary text-primary-foreground px-6 py-2 rounded-xl text-sm font-black hover:opacity-90 shadow-lg shadow-primary/20 transition-all active:scale-95 disabled:opacity-50"
         >
-          {exporting ? 'Exporting...' : 'Export CSV'}
+          {exporting ? 'EXPORTING...' : 'EXPORT_CSV'}
         </button>
       </div>
 

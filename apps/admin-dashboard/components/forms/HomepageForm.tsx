@@ -32,8 +32,8 @@ export default function HomepageForm({ initialData, onSubmit }: HomepageFormProp
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-8 max-w-4xl">
-      <div className="bg-white p-6 rounded-lg border space-y-4">
-        <h2 className="text-lg font-bold border-b pb-2">General</h2>
+      <div className="bg-card/50 backdrop-blur-xl p-8 rounded-3xl border border-border space-y-6 shadow-2xl">
+        <h2 className="text-xs font-black uppercase tracking-[0.3em] text-primary pb-4 border-b border-border/50">ARCHIVE_MANIFEST</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium mb-1">Startup Name</label>
@@ -102,9 +102,9 @@ export default function HomepageForm({ initialData, onSubmit }: HomepageFormProp
         </div>
       </div>
 
-      <div className="flex justify-end">
-        <button type="submit" className="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition" disabled={loading}>
-          {loading ? 'Saving Options...' : 'Save Configuration'}
+      <div className="flex justify-end pt-8 border-t border-border">
+        <button type="submit" className="px-10 py-4 bg-primary text-primary-foreground rounded-2xl text-sm font-black hover:opacity-90 shadow-2xl shadow-primary/30 transition-all active:scale-95 disabled:opacity-50" disabled={loading}>
+          {loading ? 'TRANSMITTING...' : 'SYNC SYSTEM CONFIG'}
         </button>
       </div>
     </form>

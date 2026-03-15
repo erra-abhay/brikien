@@ -32,7 +32,7 @@ export default function AdminBlogsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">All Blogs</h1>
-        <p className="text-gray-500">Manage all blogs in the system.</p>
+        <p className="text-muted-foreground">Manage all blogs in the system.</p>
       </div>
 
       <BlogsTable data={blogs} onDelete={handleDelete} editPrefix="/dashboard/blogs" />

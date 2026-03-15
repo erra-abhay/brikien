@@ -92,58 +92,58 @@ export default function ProjectForm({ initialData, developers, blogs, onSubmit, 
             {errors.content?.message && <p className="text-red-500 text-xs mt-1">{String(errors.content.message)}</p>}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-1">GitHub URL</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground/60 mb-2">GitHub Repository</label>
               <input 
                 {...register('githubUrl')} 
-                className="w-full border rounded-md px-3 py-2"
+                className="w-full bg-card/30 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none"
                 placeholder="https://github.com/..."
               />
-              {errors.githubUrl?.message && <p className="text-red-500 text-xs mt-1">{String(errors.githubUrl.message)}</p>}
+              {errors.githubUrl?.message && <p className="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wide">{String(errors.githubUrl.message)}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Live URL</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Live Deployment</label>
               <input 
                 {...register('liveUrl')} 
-                className="w-full border rounded-md px-3 py-2"
+                className="w-full bg-card/30 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none"
                 placeholder="https://..."
               />
-              {errors.liveUrl?.message && <p className="text-red-500 text-xs mt-1">{String(errors.liveUrl.message)}</p>}
+              {errors.liveUrl?.message && <p className="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wide">{String(errors.liveUrl.message)}</p>}
             </div>
           </div>
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white p-4 border rounded-lg">
-            <h3 className="font-medium mb-4">Settings</h3>
-            <div className="space-y-4">
+          <div className="bg-card/50 backdrop-blur-sm p-6 border border-border rounded-2xl shadow-xl">
+            <h3 className="text-sm font-black uppercase tracking-widest text-muted-foreground/50 mb-6">PROJECT_METADATA</h3>
+            <div className="space-y-6">
               <div>
-                <label className="block text-sm text-gray-600 mb-1">Status</label>
-                <select {...register('status')} className="w-full border rounded-md px-3 py-2 bg-white">
-                  <option value="upcoming">Upcoming</option>
-                  <option value="in-progress">In Progress</option>
-                  <option value="completed">Completed</option>
+                <label className="block text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Development Status</label>
+                <select {...register('status')} className="w-full bg-background/50 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none appearance-none cursor-pointer">
+                  <option value="upcoming">UPCOMING</option>
+                  <option value="in-progress">IN_PROGRESS</option>
+                  <option value="completed">COMPLETED</option>
                 </select>
-                {errors.status?.message && <p className="text-red-500 text-xs mt-1">{String(errors.status.message)}</p>}
+                {errors.status?.message && <p className="text-red-500 text-[10px] font-bold mt-2 uppercase tracking-wide">{String(errors.status.message)}</p>}
               </div>
 
               <div>
-                <label className="block text-sm text-gray-600 mb-1">Linked Blog</label>
-                <select {...register('linkedBlog')} className="w-full border rounded-md px-3 py-2 bg-white">
-                  <option value="">None</option>
+                <label className="block text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Connected Log</label>
+                <select {...register('linkedBlog')} className="w-full bg-background/50 border border-border rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none appearance-none cursor-pointer">
+                  <option value="">NONE</option>
                   {blogs.map(b => (
-                    <option key={b._id} value={b._id}>{b.title}</option>
+                    <option key={b._id} value={b._id}>{b.title.toUpperCase()}</option>
                   ))}
                 </select>
               </div>
 
-              <div className="pt-4 flex gap-2">
-                <button type="button" onClick={onCancel} className="flex-1 px-4 py-2 border rounded-md hover:bg-gray-50 transition" disabled={loading}>
-                  Cancel
+              <div className="pt-4 flex gap-3">
+                <button type="button" onClick={onCancel} className="flex-1 px-4 py-3 border border-border rounded-xl text-sm font-bold hover:bg-muted/50 transition-all active:scale-95 disabled:opacity-50">
+                  CANCEL
                 </button>
-                <button type="submit" className="flex-1 px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition" disabled={loading}>
-                  {loading ? 'Saving...' : 'Save'}
+                <button type="submit" className="flex-1 px-4 py-3 bg-primary text-primary-foreground rounded-xl text-sm font-black hover:opacity-90 shadow-lg shadow-primary/20 transition-all active:scale-95 disabled:opacity-50">
+                  {loading ? 'STORING...' : 'PERSIST'}
                 </button>
               </div>
             </div>

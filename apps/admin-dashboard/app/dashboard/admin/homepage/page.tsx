@@ -38,7 +38,7 @@ export default function AdminHomepageConfig() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Homepage Configuration</h1>
-        <p className="text-gray-500">Manage the public website content.</p>
+        <p className="text-muted-foreground">Manage the public website content.</p>
       </div>
       {config && <HomepageForm initialData={config} onSubmit={handleSubmit} />}
     </div>

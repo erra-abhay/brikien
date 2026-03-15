@@ -9,6 +9,7 @@ import {
 import { IMessage } from '@brikien/types';
 import { Trash, Mail, MailOpen } from 'lucide-react';
 import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
 import ConfirmModal from '../shared/ConfirmModal';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -89,25 +90,28 @@ export default function MessagesTable({ data, onDelete, onMarkRead }: MessagesTa
 
   return (
     <>
-      <div className="border rounded-md overflow-hidden bg-white">
+      <div className="border border-border rounded-2xl overflow-hidden bg-card/30 backdrop-blur-xl shadow-2xl">
         <table className="w-full text-sm text-left">
-          <thead className="bg-gray-50 border-b">
+          <thead className="bg-muted/50 border-b border-border">
             {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map(header => (
-                  <th key={header.id} className="px-4 py-3 font-medium text-gray-500">
+                  <th key={header.id} className="px-6 py-4 font-black text-[10px] uppercase tracking-[0.2em] text-muted-foreground/50">
                     {flexRender(header.column.columnDef.header, header.getContext())}
                   </th>
                 ))}
               </tr>
             ))}
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-border">
             {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map(row => (
-                <tr key={row.id} className={`border-b last:border-0 hover:bg-gray-50 ${row.original.isRead ? 'bg-white' : 'bg-blue-50/30'}`}>
+                <tr key={row.id} className={cn(
+                  "transition-colors hover:bg-muted/20",
+                  !row.original.isRead ? "bg-primary/5" : ""
+                )}>
                    {row.getVisibleCells().map(cell => (
-                    <td key={cell.id} className="px-4 py-3">
+                    <td key={cell.id} className="px-6 py-4">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   ))}
@@ -115,8 +119,8 @@ export default function MessagesTable({ data, onDelete, onMarkRead }: MessagesTa
               ))
             ) : (
               <tr>
-                <td colSpan={columns.length} className="px-4 py-8 text-center text-gray-500">
-                  No messages found.
+                <td colSpan={columns.length} className="px-6 py-12 text-center text-[10px] font-black uppercase tracking-widest text-muted-foreground/30 italic">
+                  No incoming transmissions.
                 </td>
               </tr>
             )}
