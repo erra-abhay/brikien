@@ -8,9 +8,8 @@ import { IBlog } from '@brikien/types';
 
 async function getBlog(slug: string) {
   try {
-    const res = await api.get(`/public/blogs`);
-    const blog = res.data.find((b: IBlog) => b.slug === slug);
-    return blog;
+    const res = await api.get(`/public/blogs/${slug}`);
+    return res.data.data;
   } catch (error) {
     return null;
   }

@@ -5,18 +5,17 @@ import Link from 'next/link';
 import { Github, Globe, ArrowLeft } from 'lucide-react';
 import { IProject } from '@brikien/types';
 
-async function getProject(id: string) {
+async function getProject(slug: string) {
   try {
-    const res = await api.get(`/public/projects`);
-    const project = res.data.find((p: IProject) => p._id === id);
-    return project;
+    const res = await api.get(`/public/projects/${slug}`);
+    return res.data.data;
   } catch (error) {
     return null;
   }
 }
 
-export default async function ProjectDetailPage({ params }: { params: { id: string } }) {
-  const project: IProject = await getProject(params.id);
+export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
+  const project: IProject = await getProject(params.slug);
 
   if (!project) {
     return (
