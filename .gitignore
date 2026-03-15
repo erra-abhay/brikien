@@ -1,0 +1,16 @@
+node_modules/
+.next/
+dist/
+build/
+.env
+.DS_Store
+*.log
+.pnpm-debug.log
+.vercel/
+.turbo/
+**/node_modules/
+**/dist/
+**/build/
+**/.next/
+**/.env
+standalone/

@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - brikien_network
+
+  mailpit:
+    image: axllent/mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - brikien_network
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "55524:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/brikienlabs
+      - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}
+      - REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}
+      - ACCESS_TOKEN_EXPIRES=15m
+      - REFRESH_TOKEN_EXPIRES=7d
+      - UPLOADS_BASE_PATH=/srv/uploads
+      - MAX_FILE_SIZE_MB=10
+      - PUBLIC_WEB_URL=${PUBLIC_WEB_URL}
+      - ADMIN_URL=${ADMIN_URL}
+      - SMTP_HOST=mailpit
+      - SMTP_PORT=1025
+      - SMTP_FROM=hello@brikienlabs.tech
+    volumes:
+      - uploads_data:/srv/uploads
+    depends_on:
+      - mongodb
+      - mailpit
+    networks:
+      - brikien_network
+
+  admin-dashboard:
+    build:
+      context: .
+      dockerfile: apps/admin-dashboard/Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    restart: unless-stopped
+    ports:
+      - "55522:4000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - INTERNAL_API_URL=http://api:5000
+    networks:
+      - brikien_network
+
+  public-web:
+    build:
+      context: .
+      dockerfile: apps/public-web/Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    restart: unless-stopped
+    ports:
+      - "55523:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - INTERNAL_API_URL=http://api:5000
+    networks:
+      - brikien_network
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      #- "443:443" # Uncomment when SSL is configured
+    volumes:
+      - uploads_data:/srv/uploads:ro
+    depends_on:
+      - public-web
+      - admin-dashboard
+      - api
+    networks:
+      - brikien_network
+
+volumes:
+  mongodb_data:
+  uploads_data:
+
+networks:
+  brikien_network:
+    driver: bridge
